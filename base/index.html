@@ -1,0 +1,58 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat app</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-300">
+    {% if request.user.is_authenticated%}
+    <nav class="bg-gray-800 min-h-screen w-48 flex items-center justify-around flex-col py-8 fixed">
+      <div class="flex flex-col items-center text-center justify-between gap-2">
+        <a href="{% url "profile" %}">
+          {% if  requset.user.profile.image%}
+          <img class="rounded-full w-24 h-24" src="https://cdn.pixabay.com/photo/2024/03/09/10/14/nature-8622415_1280.jpg" alt="">
+          {% else %}
+          <img class="rounded-full w-24 h-24" src="{% static "images/user.png" %}" alt="">
+          {% endif %}
+        <span class="text-lg text-white">{{request.user.username}}</span>
+      </a>
+      </div>
+        <div class="flex flex-col items-center justify-between gap-12">
+          <a class="{% if request.path == "/" %}bg-blue-600 w-48 h-20 flex items-center justify-center{% endif %}" href="{% url "home" %}">
+            <img class="w-12 h-12" src="{% static 'images/home.svg'%}" alt="">
+          </a>
+          <a class="{% if request.path == "/chat/" %}bg-blue-600 w-48 h-20 flex items-center justify-center{% endif %}" href="{% url "chat" %}">
+            <img class="w-12 h-12" src="{% static 'images/chat.svg'%}" alt="">
+          </a>
+          <a class="{% if request.path == "/cog/" %}bg-blue-600 w-48 h-20 flex items-center justify-center{% endif %}" href="{% url "cog" %}">
+            <img class="w-12 h-12" src="{% static 'images/cog.svg'%}" alt="">
+          </a>
+          <a class="{% if request.path == "/bell/" %}bg-blue-600 w-48 h-20 flex items-center justify-center{% endif %}" href="{% url "bell" %}" > 
+            <img class="w-12 h-12" src="{% static 'images/bell.svg'%}" alt="">
+          </a>
+        <a class="{% if request.path == "/exit/" %}bg-blue-600 w-48 h-20 flex items-center justify-center{% endif %}" href="{%url "logout" %}">
+          <img class="w-12 h-12" src="{% static 'images/exit.svg'%}" alt="">
+        </a>
+      </nav>
+    {%else%}
+    <nav class="bg-gray-800 min-h-screen w-48 flex items-center justify-between flex-col py-8 fixed">
+        <div class="flex flex-col items-center justify-between gap-12">
+          <a class="{% if request.path == "/" %}bg-blue-600 w-48 h-20 flex items-center justify-center{% endif %}" href="{% url "home" %}">
+            <img class="w-12 h-12" src="{% static 'images/home.svg'%}" alt="">
+          </a>
+          <a class="{% if request.path == "/accounts/login/" %}bg-blue-600 w-48 h-20 flex items-center justify-center{% endif %}" href="{% url "login" %}">
+            <img class="w-12 h-12" src="{% static 'images/login.svg'%}" alt="">
+          </a>
+          <a class="{% if request.path == "/accounts/signup/" %}bg-blue-600 w-48 h-20 flex items-center justify-center{% endif %}" href="{% url "signup" %}">
+            <img class="w-12 h-12" src="{% static 'images/signup.svg'%}" alt="">
+          </a>
+        </div>
+      </nav>
+    {%endif%}
+
+    {% block content %}{% endblock content %}
+</body>
+</html>
