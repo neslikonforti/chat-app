@@ -1,8 +1,18 @@
 {% extends "index.html" %}
+{%load static%}
 {% block content %}
 <div class="ml-60 bg-gray-800 h-screen flex flex-col justify-center items-center">
-    <h1 class="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-800 ">Your profile</h1>
-    <div class="px-20">
+    <h1 class="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-800 ">
+      Your profile 
+    </h1>
+
+    <div class="px-20 mt-20">
+      {% if  profile.image%}
+          <img class="rounded-full w-64 h-64 m-auto" src="{{profile.image.url}}" alt="">
+          {% else %}
+          <img class="rounded-full w-64 h-64 m-auto" src="{% static "images/user.png" %}" alt="">
+          {% endif %}
+          <a href="{% url "profile_edit" %}"><img class="w-10 h-10" src="{% static "images/edit.png" %}" alt="edit"></a>
         <div class="mt-6 border-t border-gray-100 ">
           <dl class="divide-y divide-gray-100">
             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
