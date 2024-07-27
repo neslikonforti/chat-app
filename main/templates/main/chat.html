@@ -31,7 +31,7 @@
                         {{chat.message.content}}
                     </p>
                     {% endif %}
-                    
+                
                 </div>
                 <div class="flex flex-col justify-start items-end">
                     {% if chat.message is not None %}
@@ -46,6 +46,7 @@
                         {% endif %} 
 
                     {% endif %}
+                    
                 </div>
                 <div>
 
@@ -64,6 +65,7 @@
                     <p class="{% if message.sender.username == request.user.username %}bg-indigo-900{%else%}bg-indigo-600{% endif %} p-5 text-white rounded-full mt-5">{{message.content}}</p>
                     <p class="text-gray-500 text-right text-sm">{{message.created_at}}</p>
                 </div>
+                {% if message.sender.username == request.user.username %}<a href="{% url "message_delete" id=open_chat.id message_id=message.id %}"><img class="w-4 h-4" src="{% static "images/delete.png" %}" alt=""></a>{% endif %}
             </div>
             {% endfor %}
         </div>

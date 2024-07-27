@@ -62,3 +62,13 @@ class CogPageView(LoginRequiredMixin,TemplateView):
 
 class BellPageView(LoginRequiredMixin,TemplateView):
     template_name="main/bell.html"
+def delete_message_view(req,id,message_id):
+    if message_id:
+        if Message.objects.filter(id=message_id).exists():
+            message=Message.objects.get(id=message_id)
+            message.delete()    
+            chat=Chat.objects.get(id=id)
+            if len(chat.messages.all()) == 0:
+                chat.delete()
+                return redirect("chat",id=0)
+    return redirect("chat",id=id)

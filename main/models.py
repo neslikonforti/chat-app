@@ -19,4 +19,4 @@ class Message(models.Model):
     chat=models.ForeignKey(Chat,related_name="messages",on_delete=models.CASCADE)
     def __str__(self):
         
-        return f"{self.sender.username}:{self.content}"
+        return f"{self.id}.{self.sender.username}:{self.content}"

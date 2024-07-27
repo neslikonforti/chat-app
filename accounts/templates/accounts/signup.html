@@ -9,9 +9,9 @@
             <div class="mt-10">
               {% for field in form %}
                 <div class="mt-5">
-                    <label for="first-name" class="block text-sm font-medium leading-6 text-white">{{field.label}}</label>
+                    <label for="first-name" class="block text-base font-medium leading-6 text-white">{{field.label}}</label>
                     <div class="mt-2">
-                      <input type="{% if field.name == 'password1' or field.name == 'password2' %}password{% else %}text{% endif %}" name="{{field.name}}" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                      <input type="{% if field.name == 'password1' or field.name == 'password2' %}password{% else %}text{% endif %}" name="{{field.name}}" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6">
                     </div>
                   </div>
                   {% if field.errors %}
@@ -23,7 +23,8 @@
             </div>
           </div>
         <div class="mt-6 flex items-center justify-end gap-x-6">
-          <button type="submit" class="rounded-md bg-indigo-600 px-5 py-4 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Signup</button>
+          <p class="text-base text-white">Have already an account? <a class="text-blue-500 underline"href="{% url "login" %}" >Login!</a></p>
+          <button type="submit" class="rounded-md bg-indigo-600 px-5 py-4 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Signup</button>
         </div>
   </form>
 </div>
