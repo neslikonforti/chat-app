@@ -93,16 +93,16 @@ MEDIA_ROOT=BASE_DIR/"media"
 
 MEDIA_URL="/media/"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
 
-EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST = 'smtp.mail.ru' 
 
-EMAIL_PORT = 587 
+EMAIL_PORT = 587
 
 EMAIL_USE_TLS = True 
 
-EMAIL_HOST_USER = 'your-email@example.com' 
+EMAIL_HOST_USER = 'test123asd9@mail.ru' 
 
-EMAIL_HOST_PASSWORD = 'your-email-password'
+EMAIL_HOST_PASSWORD = 'bvrA0DpJ8GPsQP8Vi5qT'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -13,43 +13,21 @@
             <h2
                 class="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-800 mt-8">
                 Chats</h2>
-            {% for chat in chats %}
-            <a class="flex text-white gap-4 border-b py-4 mt-10 {% if chat.id == open_chat.id %} bg-gray-500 {% endif %}" href="{% url "chat" chat.id %}">
+            {% for user in search %}
+            <a class="flex text-white gap-4 border-b py-4 mt-10 {% if chat.id == open_chat.id %} bg-gray-500 {% endif %}" href="{% url "find_chat_open" user.id %}">
                 <div>
-                    {% if chat.user.profile.image%}
-                    <img class="rounded-full w-20 h-20 bg-slate-700 p-4" src="{{ chat.user.profile.image.url }}" alt="">
+                    {% if user.profile.image%}
+                    <img class="rounded-full w-20 h-20 bg-slate-700 p-4" src="{{ user.profile.image.url }}" alt="">
                     {% else %}
                     <img class="rounded-full w-20 h-20 bg-slate-700 p-4" src="{% static 'images/user.png' %}" alt="">
                     {% endif %}
                 </div>
                 <div class="grow">
                     <p class="text-lg font-bold">
-                        {{chat.user.username}}
+                        {{user.username}}
                     </p>
-                    {% if chat.message is not None %}
-                    <p>
-                        {{chat.message.content}}
-                    </p>
-                    {% endif %}
-                
-                </div>
-                <div class="flex flex-col justify-start items-end">
-                    {% if chat.message is not None %}
-                        <p class="opacity-50">
-                            {{chat.message.created_at}}
-                        </p>
-                    
-                        {% if chat.message.read is True %}
-                        <img src="{% static "images/read.png" %}" >
-                        {% else %}
-                        <img src="{% static "images/notread.png" %}" >
-                        {% endif %} 
-
-                    {% endif %}
-                    
                 </div>
                 <div>
-
                 </div>
             </a>
             {% endfor %}
@@ -59,15 +37,6 @@
         <h2 class="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-800">{% if chat_to == None %}Click on the chat to open it{% else %} {{chat_to.username}} {% endif %}
         </h2>
         <div class="h-[80vh]">
-            {% for message in chat_messages %}
-            <div class="flex grow w-full {% if message.sender.username == request.user.username %} justify-end {% endif %}">
-                <div class="w-1/2">
-                    <p class="{% if message.sender.username == request.user.username %}bg-indigo-900{%else%}bg-indigo-600{% endif %} p-5 text-white rounded-full mt-5">{{message.content}}</p>
-                    <p class="text-gray-500 text-right text-sm">{{message.created_at}}</p>
-                </div>
-                {% if message.sender.username == request.user.username %}<a href="{% url "message_delete" id=open_chat.id message_id=message.id %}"><img class="w-4 h-4" src="{% static "images/delete.png" %}" alt=""></a>{% endif %}
-            </div>
-            {% endfor %}
         </div>
         {% if chat_to != None %}
         <div>

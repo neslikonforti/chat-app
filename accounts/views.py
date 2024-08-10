@@ -62,8 +62,8 @@ class MyPasswordChangeDoneView(LoginRequiredMixin,PasswordChangeDoneView):
 #1.Человек должен получить страницу, в котором заполняет почту, куда будет отправлено письмо
 class MyPasswordResetView(PasswordResetView):
     template_name="accounts/password_reset.html"
-    html_email_template_name="account/password_reset_email.html"
-    email_template_name="account/password_reset_email.html"
+    html_email_template_name="accounts/password_reset_email.html"
+    email_template_name="accounts/password_reset_email.html"
 #2.Человек должен получить страницу, в котором написано "На твою почту отправили письмо, проверь его!"
 class MyPasswordResetDoneView(PasswordResetDoneView):
     template_name="accounts/password_reset_done.html"
