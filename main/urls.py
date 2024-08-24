@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomePageView, ChatPageView , CogPageView, BellPageView ,delete_message_view, FindPageView
+from .views import HomePageView, ChatPageView , CogPageView, BellPageView ,delete_message_view, FindPageView, FindPageChatView
 urlpatterns = [
     path("",HomePageView.as_view(),name="home"),
     path("chat/<int:id>",ChatPageView.as_view(),name="chat"),
@@ -7,5 +7,6 @@ urlpatterns = [
     path("cog/",CogPageView.as_view(),name="cog"),
     path("bell/",BellPageView.as_view(),name="bell"),
     path("findchat/",FindPageView.as_view(),name="find_chat"),
-    path("findchat/<int:id>",FindPageView.as_view(),name="find_chat_open"),
+    path("findchat/<int:id>/<str:name>",FindPageChatView.as_view(),name="find_chat_open"),
+
 ]

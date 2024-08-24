@@ -76,7 +76,7 @@ def delete_message_view(req,id,message_id):
  
 class FindPageView(LoginRequiredMixin,View):
     template_name="main/find.html"
-    def get(self,req,id=""):
+    def get(self,req):
         name=req.GET.get("username")
         search=[]
         users= User.objects.filter(username__contains=name)
@@ -92,8 +92,44 @@ class FindPageView(LoginRequiredMixin,View):
             "search": search,
             "open_chat": None,
             "chat_to": None,
+            "name": name,
         }
 
         return render(req,self.template_name,stx)
     def post(self,req):
         pass
+
+class FindPageChatView(LoginRequiredMixin,View):
+    template_name="main/find.html"
+    def get(self,req,id,name):
+        participants=User.objects.filter(id__in=[id,req.user.id])
+        chats=Chat.objects.filter(participants__id=id).filter(participants__id=req.user.id)
+        if len(chats) > 0:
+            return redirect("chat",id=chats[0].id)
+        search=[]
+        users= User.objects.filter(username__contains=name)
+        print(users)
+        for user in users:
+            if user.username == req.user.username:
+                continue
+        
+            search.append(
+                        user
+                    )
+        stx={
+            "search": search,
+            "open_chat": None,
+            "chat_to": id,
+            "name": name,
+        }
+
+        return render(req,self.template_name,stx)
+    def post(self,req,id,name):
+        chat=Chat.objects.create()
+        user1=req.user
+        user2=User.objects.get(id=id)
+        chat.participants.add(user1,user2)
+        chat.save()
+        message=req.POST.get('message')
+        Message.objects.create(content=message,sender=user1,chat=chat)
+        return redirect("chat",id=chat.id)

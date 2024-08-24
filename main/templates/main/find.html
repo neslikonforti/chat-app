@@ -4,7 +4,7 @@
 <div class="ml-60 h-screen flex justify-center items-center gap-7">
     <div class="flex flex-col h-screen w-1/3 bg-gray-800 p-7 ">
         <form class="flex " action="/findchat">
-            <input name="username" type="text"
+            <input name="username" type="text" value="{{name}}"
                 class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             <button type="submit"
                 class="rounded-md bg-indigo-600 px-5 py-4 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Find</button>
@@ -12,9 +12,10 @@
         <div class=" grow">
             <h2
                 class="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-800 mt-8">
-                Chats</h2>
+                Found people</h2>
+                <p class="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-800 mt-8">{% if search|length == 0 %}Users not found{% endif %}</p>
             {% for user in search %}
-            <a class="flex text-white gap-4 border-b py-4 mt-10 {% if chat.id == open_chat.id %} bg-gray-500 {% endif %}" href="{% url "find_chat_open" user.id %}">
+            <a class="flex text-white gap-4 border-b py-4 mt-10 {% if chat.id == open_chat.id %} bg-gray-500 {% endif %}" href="{% url "find_chat_open" user.id name%}">
                 <div>
                     {% if user.profile.image%}
                     <img class="rounded-full w-20 h-20 bg-slate-700 p-4" src="{{ user.profile.image.url }}" alt="">
